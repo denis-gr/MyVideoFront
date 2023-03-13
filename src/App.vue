@@ -8,8 +8,9 @@ import { RouterLink, RouterView } from 'vue-router';
       <RouterLink class="navbar-brand" to="/">MyVideo</RouterLink>
     </div>
   </nav>
-
-  <RouterView />
+  <main class="min-vh-100 py-3">
+    <RouterView />    
+  </main>
   <div class="footer text-center bg-light">
     <div>
       <span>Вход для админа: </span>

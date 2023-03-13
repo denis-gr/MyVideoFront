@@ -18,10 +18,10 @@
                    <span>x</span>
                    <span v-text="video.original_height"></span>
                 </option>
-                <option value="360">360</option>
-                <option value="480">480</option>
-                <option value="720">720</option>
-                <option value="1080">1080</option>
+                <option value="360" v-if="video.video_360">360</option>
+                <option value="480" v-if="video.video_480">480</option>
+                <option value="720" v-if="video.video_720">720</option>
+                <option value="1080" v-if="video.video_1080">1080</option>
               </select>
               <a @click="setUrlWithTime" class="btn btn-secondary">Сохранить время</a>
             </div>
@@ -58,7 +58,7 @@
 export default {
   data() {
     return { 
-        videos: [],
+        allvideos: [],
         video: {},
         quality: "original",
     }
@@ -74,9 +74,9 @@ export default {
     load: async function() {
       const videoId = document.location.hash.match(/id:(\d*):/)[1];
       const response = await fetch("/api/videos.json")
-      this.videos = await response.json()
-      const response2 = await fetch(`/api/videos/${videoId}.json`)
-      this.video = await response2.json()      
+      this.allvideos = await response.json();
+      const response2 = await fetch(`/api/videos/${videoId}.json`);
+      this.video = await response2.json();
     },
     setUrlWithTime() {
       const time = Math.floor(document.querySelector("video").currentTime);
@@ -84,8 +84,11 @@ export default {
     },
     setTime() {
       const time = (document.location.hash.match(/time:(\d*):/)||[0, 0])[1];
-      document.querySelector("video").currentTime = time
+      document.querySelector("video").currentTime = time;
     },
+  },
+  computed: {
+    videos: vm => vm.allvideos.filter(i => i.id != vm.video.id).slice(0, 4),
   },
 }
 </script>
