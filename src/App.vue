@@ -11,9 +11,14 @@ import { RouterLink, RouterView } from 'vue-router';
 
   <RouterView />
   <div class="footer text-center bg-light">
-    <span>Вход для админа: </span>
-    <a href="/admin" class="link me-1">Wagtail</a>
-    <a href="/django-admin" class="link">Django</a>
+    <div>
+      <span>Вход для админа: </span>
+      <a href="/admin" class="link me-1">Wagtail</a>
+      <a href="/django-admin" class="link">Django</a>      
+    </div>
+    <div>
+      <a href="https://github.com/denis-gr/MyVideo" class="link me-1">GitHub</a>    
+    </div>
   </div>
 </template>
 

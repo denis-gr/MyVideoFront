@@ -55,7 +55,6 @@
 
 
 <script>
-const backendDomain = "8000-denisgr-myvideo-x5gkonzz9sw.ws-eu89.gitpod.io";
 export default {
   data() {
     return { 
@@ -70,15 +69,13 @@ export default {
     this.setTime();
   },
   methods: {
-    get_url: (url) => "https://" + backendDomain + "/" + (url || "///").split("/").slice(3).join("/"),
+    get_url: (url) => "/" + (url || "///").split("/").slice(3).join("/"),
     formatDate: date => new Date(date).toLocaleString(),
     load: async function() {
       const videoId = document.location.hash.match(/id:(\d*):/)[1];
-      const url = "https://" + backendDomain + "/api/videos.json"
-      const response = await fetch(url)
+      const response = await fetch("/api/videos.json")
       this.videos = await response.json()
-      const url2 = "https://" + backendDomain + `/api/videos/${videoId}.json`
-      const response2 = await fetch(url2)
+      const response2 = await fetch(`/api/videos/${videoId}.json`)
       this.video = await response2.json()      
     },
     setUrlWithTime() {

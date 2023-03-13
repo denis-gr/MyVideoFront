@@ -29,19 +29,17 @@
 
 
 <script>
-const backendDomain = "8000-denisgr-myvideo-x5gkonzz9sw.ws-eu89.gitpod.io";
 
 export default {
   data() {
     return { videos: [] }
   },
   async created() {
-    const url = "https://" + backendDomain + "/api/videos.json"
-    const response = await fetch(url)
+    const response = await fetch("/api/videos.json")
     this.videos = await response.json()
   },
   methods: {
-    get_url: (url) => "https://" + backendDomain + "/" + (url || "///").split("/").slice(3).join("/"),
+    get_url: (url) => "/" + (url || "///").split("/").slice(3).join("/"),
   },
 }
 </script>
